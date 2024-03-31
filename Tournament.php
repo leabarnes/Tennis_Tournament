@@ -1,3 +1,5 @@
+<?
+import('Round.php');
 class Tournament{
     
     private $gender;
@@ -5,6 +7,9 @@ class Tournament{
     private $winner;
     private $players_count;
     private $max_players;
+    private $current_rounds = array();
+    private $next_rounds = array();
+    private $last_round = 0;
 
 
     public __construct($max_players, $gender){
@@ -20,14 +25,34 @@ class Tournament{
         }
     }
 
-    public function playRound(Player $player1, Player $player2){
-        $player1->calculateRoundWinChance();
-        $player2->calculateRoundWinChance();
-        if($player1->win_chance == $player2->win_chance){
-            $winner = $player1->luck > $player2->luck ? $player1->tournament_id:$player2->tournament_id;
-        } else {
-            $winner = $player1->win_chance > $player2->win_chance ? $player1->tournament_id:$player2->tournament_id;
+    public function loteryRounds(){
+        shuffle($this->players);
+        $round_num = 0;
+        $aux_round = new Round($round_num);
+        foreach($this->players as $player){
+            if(!$aux_round->addPlayer($player)){
+                $round_num++;
+                $this->current_rounds[] = $aux_round;
+                $aux_round = new Round($round_num, $player);
+            }
         }
-        $this->winPlayer($winner);
+        $this->last_round = $round_num;
+    }
+
+    public function playTournament(){
+        if(count($this->current_rounds) == 1){
+            // TODO: Final!
+        }
+        $round_num = $this->last_round + 1;
+        $aux_round = new Round($round_num)
+        foreach($this->current_rounds as $round){
+            $winner = $round->playRound();
+            if(!$aux_round->addPlayer($winner)){
+                $round_num++;
+                $this->next_rounds[] = $aux_round;
+                $aux_round = new Round($round_num, $winner);
+            }
+        }
+        $this->last_round = $round_num;
     }
 }
