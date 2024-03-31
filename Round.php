@@ -31,8 +31,13 @@ class Round{
         if($player1->win_chance == $player2->win_chance){
             $winner = $player1->luck > $player2->luck ? $player1->tournament_id:$player2->tournament_id;
         } else {
-            $winner = $player1->win_chance > $player2->win_chance ? $player1:$player2;
+            if($player1->luck > $player2->luck){
+                $player1->luckiest();
+            } else if($player1->luck < $player2->luck){
+                $player2->luckiest();
+            }
+            $this->winner = $player1->win_chance > $player2->win_chance ? $player1:$player2;
         }
-        return $winner;
+        return $this->winner;
     }
 }

@@ -25,7 +25,7 @@ class Tournament{
         }
     }
 
-    public function loteryRounds(){
+    public function lotteryRounds(){
         shuffle($this->players);
         $round_num = 0;
         $aux_round = new Round($round_num);
@@ -53,6 +53,8 @@ class Tournament{
                 $aux_round = new Round($round_num, $winner);
             }
         }
+        $this->current_rounds = $this->next_rounds;
+        $this->next_rounds = array();
         $this->last_round = $round_num;
     }
 }
