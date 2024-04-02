@@ -22,7 +22,7 @@ class Player{
     const LUCK_BOOST_PERCENTAGE = 5;
 
 
-    public __construct($name, $gender, $handicap, $extra){
+    function __construct($name, $gender, $handicap, $extra){
         $this->name = $name;
         $this->gender = $gender;
         $this->handicap = min($handicap, self::MAX_HANDICAP);
