@@ -7,7 +7,7 @@ CREATE TABLE `tournaments`(
   `gender` ENUM('M', 'F') NOT NULL DEFAULT 'M',
   `date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` TINYINT DEFAULT 0,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`id`)
 );
 
 DROP TABLE IF EXISTS `rounds`;
