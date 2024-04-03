@@ -2,4 +2,8 @@
 include 'Application';
 
 $app = new Application();
-$app->startRandomTournament();
+try{
+    $app->startRandomTournament();
+} catch(Exception $e){
+    echo $e->getMessage();
+}
