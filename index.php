@@ -29,7 +29,7 @@
     </body>
     <script>
         function simulateList(){
-            var list = $("#player_list").val;
+            var list = $("#player_list").val();
             $.ajax({
                 method: "POST",
                 url: "/api/simulate.php",
@@ -39,8 +39,8 @@
             });
         }
         function simulate(){
-            var num_players = $("#num_players").val;
-            var gender = $("#gender").val;
+            var num_players = $("#num_players").val();
+            var gender = $("#gender").val();
             var random = $("#random").checked;
             $.ajax({
                 method: "POST",
