@@ -11,7 +11,6 @@ class Database {
         if(mysqli_error(self::$mysql)){
             throw new Exception("Cannot connect to DB", 500);
         }
-        self::$db_connected = true;
     }
 
     public static function runQuery($query){
