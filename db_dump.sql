@@ -12,8 +12,8 @@ CREATE TABLE `tournaments`(
 
 DROP TABLE IF EXISTS `rounds`;
 CREATE TABLE `rounds`(
-  `id` INT NOT NULL,
   `tournament_id` BIGINT(20) NOT NULL,
+  `id` INT NOT NULL,
   `player1_json` TEXT NOT NULL,
   `player2_json` TEXT,
   `winner` tinyint(1),
