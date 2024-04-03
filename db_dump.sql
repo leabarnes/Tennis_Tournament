@@ -17,6 +17,6 @@ CREATE TABLE `rounds`(
   `player1_json` TEXT NOT NULL,
   `player2_json` TEXT,
   `winner` tinyint(1),
-  PRIMARY KEY (`id`, `tournament_id`),
+  PRIMARY KEY (`tournament_id`, `id`),
   CONSTRAINT `FK_TournamentRound` FOREIGN KEY (`tournament_id`) REFERENCES tournaments(`id`)
 );
