@@ -15,3 +15,5 @@ http://3.144.130.245/api/simulate.php recieve 1 or 3 params
 
 
 All the code should work in a simple LAMP but you must set the DB using the db_dump.sql
+
+Side note: Added composer to use PHPUnit, but no Test was created so is not used right now
