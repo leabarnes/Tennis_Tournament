@@ -56,8 +56,7 @@ class Database {
         $stmt = self::$mysql->prepare($query);
         $stmt->bind_param($type, ...$param_values);
         $stmt->execute();
-        $result = $stmt->get_result();
-        if(!$result){
+        if(mysqli_stmt_errno($stmt) !== 0){
             var_dump(mysqli_error(self::$mysql));
             throw new Exception("Failed to save values in ".$table);
         }
