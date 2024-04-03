@@ -1,5 +1,5 @@
 <?php
-include 'Application';
+include 'Application.php';
 
 $app = new Application();
 try{
