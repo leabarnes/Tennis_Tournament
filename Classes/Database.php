@@ -78,7 +78,12 @@ class Database {
     public static function update($table, $values, $where){
         $update_array = array();
         foreach($values as $key => $value){
-            $update_array[] = $key." = ".$values;
+            $type = self::getTypeOfValues($value);
+            if($type == "s"){
+                $update_array[] = $key." = '".$value."'";
+            } else {
+                $update_array[] = $key." = ".$value;
+            }
         }
         $update_string = implode(", ", $update_array);
         $query = "UPDATE ".$table." SET ".$update_string." WHERE ". $where;

@@ -75,8 +75,14 @@ class TournamentController{
             $current_phase++;
         } while (!$winner && $current_phase<=$max_phases);
         if(!$winner){
+            $values = array("status" => 2);
+            $where = "id = ".$tournament_id;
+            $tournament->update($values, $where);
             return false;
         }
+        $values = array("status" => 1);
+        $where = "id = ".$tournament_id;
+        $tournament->update($values, $where);
         return $winner;
     }
 
