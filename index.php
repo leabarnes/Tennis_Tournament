@@ -25,6 +25,24 @@
         <input id="gender">
         <p>Random <input id="random" type="checkbox"></p>
         <a  href="#" onclick="simulate()">Simulate </a><br/>
+        
+        <h3>Find Tournament</h3><br/>
+        <p>Field</p>
+        <select id="search_field">
+            <option value="id">ID</option>
+            <option value="status">Status</option>
+            <option value="date">Date</option>
+            <option value="gender">Gender</option>
+        </select>
+        <p>Condition</p>
+        <select id="search_condition">
+            <option value="lower">Lower Than</option>
+            <option value="equal">Equal To</option>
+            <option value="higher">Higher Than</option>
+        </select>
+        <p>Value <input id="search_value"></p>
+        <a  href="#" onclick="find()">Find </a><br/>
+        <div id="find_results"></div>
     </body>
     <script>
         function simulateList(){
@@ -34,7 +52,7 @@
                 url: "/api/simulate.php",
                 data: { player_list: list }
             }).done(function( msg ) {
-                alert( "Winner: " + msg );
+                alert( "Result: " + msg );
             });
         }
         function simulate(){
@@ -46,7 +64,19 @@
                 url: "/api/simulate.php",
                 data: { num_players: num_players, gender: gender, random: random }
             }).done(function( msg ) {
-                alert( "Winner: " + msg );
+                alert( "Result: " + msg );
+            });
+        }
+        function find(){
+            var search_field = $("#search_field").val();
+            var search_condition = $("#search_condition").val();
+            var search_value = $("#search_value").val();
+            $.ajax({
+                method: "POST",
+                url: "/api/find.php",
+                data: { search_field: search_field, search_condition: search_condition, search_value: search_value }
+            }).done(function( data ) {
+                $("#find_results").append(data);
             });
         }
     </script>
