@@ -30,6 +30,7 @@
     <script>
         function simulateList(){
             var list = $("#player_list").val();
+            list = "\""+list.replace(/"/g, "'")+"\"";
             $.ajax({
                 method: "POST",
                 url: "/api/simulate.php",
