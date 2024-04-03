@@ -63,7 +63,7 @@ class TournamentController{
         $this->current_tournament = $tournament = new Tournament($num_players, $gender);
         $tournament_id = $tournament->getLastTournamentId() + 1;
         $tournament->setCurrentId($tournament_id);
-        $tournament->save();
+        $tournament->saveNew();
         foreach($player_list as $player){
             $tournament->addPlayer($player);
         }
