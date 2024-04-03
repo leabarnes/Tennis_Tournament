@@ -83,7 +83,7 @@ class Application{
             $search_condition = "equal";
         }
 
-        if(($search_field == "id" || $search_field == "status") && !is_int($search_value)){
+        if(($search_field == "id" || $search_field == "status") && !is_numeric($search_value)){
             echo 'Wrong Search Value';
             return;
         }
