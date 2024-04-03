@@ -10,7 +10,7 @@ class PlayersArray extends Player{
 
 
     function __construct($player_list){
-        $json_list = json_decode($player_list);
+        $json_list = json_decode($player_list, true);
         $first = true;
         foreach($json_list as $player_data){
             $name = $player_data["name"];
