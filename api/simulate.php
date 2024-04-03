@@ -8,6 +8,7 @@ if(isset($_POST['player_list'])){
     } catch(Exception $e){
         echo $e->getMessage();
     }
+    return;
 }
 $num_players = $_POST['num_players'];
 $gender = $_POST["gender"];

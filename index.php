@@ -6,7 +6,7 @@
         <h3>Simulate Tournament Listed Players</h3><br/>
         <form action="">
             <p>Player List (JSON)</p>
-            <textarea id="player_list" style="width: 632px; height: 152px;">
+            <textarea id="player_list" style="width: 795px; height: 134px;">
 [{"name":"Test 0","gender":"M","extra":{"handicap":24,"force":9,"velocity":4,"reaction":0}},
 {"name":"Test 1","gender":"M","extra":{"handicap":11,"force":10,"velocity":8,"reaction":0}},
 {"name":"Test 2","gender":"M","extra":{"handicap":74,"force":3,"velocity":1,"reaction":0}},
