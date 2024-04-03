@@ -44,12 +44,33 @@ class Database {
 
     public static function insert($table, $values){
         $keys = array_keys($values);
-        $query = "INSERT INTO ".$table." (".implode(",", $keys).") VALUES (".implode(", ", $values).")";
-        $result = self::runQuery($query);
+        $query_values = sprintf("%'.?".count($values));
+        $query = "INSERT INTO ".$table." (".implode(",", $keys).") VALUES (".$query_values.")";
+        $stmt = self::$mysql->prepare($query);
+        $type = "";
+        foreach($values as $value){
+            $type .= self::getTypeOfValues($value);
+        }
+        $stmt->bind_param($type, ...$values);
+        $stmt->execute();
+        $result = $stmt->get_result();
         if(!$result){
             var_dump(mysqli_error(self::$mysql));
             throw new Exception("Failed to save values in ".$table);
         }
+    }
+
+    private static function getTypeOfValues($value){
+        if(is_float($value)){
+            $string .= "d";
+        }elseif(is_integer($value)){
+            $string .= "i";
+        }elseif(is_string($value)){
+            $string .= "s";
+        }else{
+            $string .= "b";
+        }
+        return $string;
     }
 
     public static function update($table, $values, $where){
