@@ -1,9 +1,9 @@
 <?php
-include BASE_DIR.'/Classes/Player.php';
-include BASE_DIR.'/Classes/PlayersArray.php';
-include BASE_DIR.'/Classes/Round.php';
-include BASE_DIR.'/Classes/Tournament.php';
-include BASE_DIR.'/Classes/Database.php';
+include $_SERVER["DOCUMENT_ROOT"].'/Classes/Player.php';
+include $_SERVER["DOCUMENT_ROOT"].'/Classes/PlayersArray.php';
+include $_SERVER["DOCUMENT_ROOT"].'/Classes/Round.php';
+include $_SERVER["DOCUMENT_ROOT"].'/Classes/Tournament.php';
+include $_SERVER["DOCUMENT_ROOT"].'/Classes/Database.php';
 class TournamentController{
 
     private $current_tournament;

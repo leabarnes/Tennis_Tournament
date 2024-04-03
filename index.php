@@ -1,5 +1,5 @@
 <?php
-define('BASE_DIR', __DIR__);
+print $_SERVER["DOCUMENT_ROOT"];
 include 'Application.php';
 
 $app = new Application();
