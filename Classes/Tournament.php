@@ -28,7 +28,6 @@ class Tournament{
         if($this->players_count < $this->max_players){
             $this->players[] = $player;
             $this->players_count++;
-            $player->setTournamentId($this->players_count);
         }
     }
 
