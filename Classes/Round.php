@@ -23,12 +23,12 @@ class Round{
         if($player == null){
             return false;
         }
-        if(isset($this->player1)){
+        if($this->player1 != null){
             $this->player2 = $player;
         } else {
             $this->player1 = $player;
         }
-        return false;
+        return true;
     }
 
     public function playRound(){

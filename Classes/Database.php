@@ -64,15 +64,13 @@ class Database {
 
     private static function getTypeOfValues($value){
         if(is_float($value)){
-            $string .= "d";
+            return "d";
         }elseif(is_integer($value)){
-            $string .= "i";
+            return "i";
         }elseif(is_string($value)){
-            $string .= "s";
-        }else{
-            $string .= "b";
+            return "s";
         }
-        return $string;
+        return "b";
     }
 
     public static function update($table, $values, $where){
