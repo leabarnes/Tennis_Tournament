@@ -14,8 +14,7 @@ class PlayersArray extends Player{
             throw new Exception("Bad JSON Format", 999);
         }
         $first = true;
-        foreach($player_list as $player_json){
-            $player_data = json_decode($player_json, true);
+        foreach($player_list as $player_data){
             $name = $player_data["name"];
             if(!$gender){
                 $gender = $player_data["gender"];
