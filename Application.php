@@ -10,7 +10,7 @@ Se desea modelar el comportamiento de un torneo de tenis
 - Cada jugador tiene un nombre y un nivel de habilidad (entre 0 y 100)
 - En un enfrentamiento entre dos jugadores influyen el nivel de habilidad y la suerte para decidir al ganador del mismo. Es su decision de diseño que forma incide la suerte en este enfrentamiento.
 - En el torneo masculino, se deben considerar la fuerza y la velocidad de desplazamiento como parametros adicionales al momento de calcular al ganador.
-- En el torneo femenino, se debe considerar el tiempo de raccion como un parametro adicional al momento de calcular al ganador
+- En el torneo femenino, se debe considerar el tiempo de reaccion como un parametro adicional al momento de calcular al ganador
 - No existen los empates
 - Se requiere que a partir de una lista de jugadores se simule el torneo y se obtenga como output al ganador del mismo.
 - Se valoraran las buenas practicas de Programacion Orientada a Objetos
@@ -35,3 +35,16 @@ Apartado 3: Utilizar una base de datos no embebida
 Apartado 4: Subir el codigo a un repositorio como GitLab/Github/etc.
 Apartado 5: Subir el o los servicios a AWS/Azure/etc utilizando Docker o Kubernetes
 */
+
+include 'Controllers/TournamentController.php';
+class Application{
+    public function startRandomTournament(){
+        global $TOURNAMENT_CONTROLLER;
+        $winner = $TOURNAMENT_CONTROLLER->startTournament(16, "M", true);
+        if(!$winner){
+            echo "Error at simulating the matches. No winner found";
+            return;
+        }
+        echo $winner->name;
+    }
+}

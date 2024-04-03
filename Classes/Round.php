@@ -1,16 +1,19 @@
 <?
 class Round{
     
+    const ROUND_TABLE = 'rounds';
     private $player1;
     private $player2;
     private $winner;
     private $num_round;
+    private $tournament_id;
 
 
-    function __construct($num_round, $player1 = null, $player2 = null){
+    function __construct($tournament_id, $num_round, $player1 = null, $player2 = null){
         $this->num_round = $num_round;
         $this->player1 = $player1;
         $this->player2 = $player2;
+        $this->tournament_id = $tournament_id;
     }
 
     public function addPlayer($player){
@@ -34,7 +37,7 @@ class Round{
         $player1->calculateRoundWinChance();
         $player2->calculateRoundWinChance();
         if($player1->win_chance == $player2->win_chance){
-            $winner = $player1->luck > $player2->luck ? $player1->tournament_id:$player2->tournament_id;
+            $this->winner = $player1->luck > $player2->luck ? $player1->tournament_id:$player2->tournament_id;
         } else {
             if($player1->luck > $player2->luck){
                 $player1->luckiest();
@@ -43,6 +46,17 @@ class Round{
             }
             $this->winner = $player1->win_chance > $player2->win_chance ? $player1:$player2;
         }
+        $this->saveRound();
         return $this->winner;
+    }
+
+    private function saveRound(){
+        $num_round = $this->num_round;
+        $player1_json = $this->player1->getJson();
+        $player2_json = $this->player2 ? $this->player2->getJson():null;
+        $winner = $this->winner == $this->player1 ? 1:2;
+        $tournament_id = $this->tournament_id;
+        $values = array("id" => $num_round, "tournament_id" => $tournament_id, "player1_json" => $player1_json, "player2_json" => $player2_json, "winner" => $winner);
+        Database::insert(self::ROUND_TABLE, $values);
     }
 }

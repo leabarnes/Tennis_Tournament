@@ -3,7 +3,10 @@ include '../Classes/Player.php';
 include '../Classes/PlayersArray.php';
 include '../Classes/Round.php';
 include '../Classes/Tournament.php';
+include '../Classes/Database.php';
 class TournamentController{
+
+    private $current_tournament;
     public function __contruct(){
 
     }
@@ -43,6 +46,9 @@ class TournamentController{
     public function startTournament($num_players = null, $gender = null, $random = false){
         if(!$num_players){
             $players_array = $this->getPostPlayersList();
+            if(!$players_array){
+                throw new Exception("An error ocurred when trying to get the players list", 999);
+            }
             $player_list = $players_array->getPlayersArray();
             $num_players = $players_array->getNumPlayers();
             $gender = $players_array->getTournamentGender();
@@ -54,20 +60,30 @@ class TournamentController{
                 $player_list = $this->getSequentialPlayerList($num_players, $gender);
             }
         }
-        $current_tournament = new Tournament($num_players, $gender);
+        $this->current_tournament = $tournament = new Tournament($num_players, $gender);
+        $tournament_id = $tournament->getLastTournamentId() + 1;
+        $tournament->setCurrentId($tournament_id);
+        $tournament->save();
         foreach($player_list as $player){
-            $current_tournament->addPlayer($player);
+            $tournament->addPlayer($player);
         }
-        $current_tournament->lotteryRounds();
-        $max_phases = $current_tournament->calculatePhases();
+        $tournament->lotteryRounds();
+        $max_phases = $tournament->calculatePhases();
         $current_phase = 0;
         do{
-            $winner = $current_tournament->playPhase();
+            $winner = $tournament->playPhase();
             $current_phase++;
         } while (!$winner && $current_phase<=$max_phases);
+        if(!$winner){
+            return false;
+        }
+        return $winner;
     }
 
-    public static function createNewRound($round_num, $player){
-        return new Round($round_num, $player);
+    public static function createNewRound($tournament_id, $round_num, $player = null){
+        return new Round($tournament_id, $round_num, $player);
     }
+
 }
+
+$TOURNAMENT_CONTROLLER = new TournamentController();
