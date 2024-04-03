@@ -45,6 +45,6 @@ class Application{
             echo "Error at simulating the matches. No winner found";
             return;
         }
-        echo $winner->name;
+        echo $winner->getName();
     }
 }
