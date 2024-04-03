@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS 'tennis';
-USE 'tennis';
+CREATE DATABASE IF NOT EXISTS `tennis`;
+USE `tennis`;
 
 DROP TABLE IF EXISTS `tournaments`;
 CREATE TABLE `tournaments`(
