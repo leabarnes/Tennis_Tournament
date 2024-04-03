@@ -44,7 +44,7 @@ class Database {
 
     public static function insert($table, $values){
         $keys = array_keys($values);
-        $query_values = sprintf("%'.?".count($values));
+        $query_values = sprintf("%'.?".count($values), "");
         $query = "INSERT INTO ".$table." (".implode(",", $keys).") VALUES (".$query_values.")";
         $stmt = self::$mysql->prepare($query);
         $type = "";
