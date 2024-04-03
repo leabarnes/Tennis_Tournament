@@ -1,5 +1,5 @@
 <?php
-include 'Application.php';
+include $_SERVER["DOCUMENT_ROOT"].'Application.php';
 
 $app = new Application();
 if(isset($_POST['player_list'])){
