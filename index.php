@@ -5,7 +5,7 @@ $app = new Application();
 try{
     $app->startRandomTournament();
 } catch(Exception $e){
-    //echo $e->getMessage();
+    echo $e->getMessage();
 }
 ?>
 <html>
