@@ -1,5 +1,4 @@
 <?php
-print $_SERVER["DOCUMENT_ROOT"];
 include 'Application.php';
 
 $app = new Application();

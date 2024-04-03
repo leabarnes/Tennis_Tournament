@@ -80,9 +80,11 @@ class Tournament{
     }
 
     public function getLastTournamentId(){
-        $query = "SELECT id FROM tournaments ORDER BY id DESC LIMIT 1";
-        $last_id = Database::runQuery($query, "single");
-        return $last_id ?? 0;
+        $select = "id";
+        $tables = self::TOURNAMENT_TABLE;
+        $where = "TRUE ORDER BY id DESC LIMIT 1";
+        $last_id = Database::find($select, $tables, $where, "single");
+        return $last_id ? $last_id['id']:0;
     }
 
     public function saveNew(){

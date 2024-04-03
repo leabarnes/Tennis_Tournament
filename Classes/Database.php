@@ -34,6 +34,9 @@ class Database {
 				}
                 break;
             case "single":
+                if($mysqli_result->num_rows == 0){
+                    return null;
+                }
                 $results = $mysqli_result->fetch_assoc();
         }
         return $results;
