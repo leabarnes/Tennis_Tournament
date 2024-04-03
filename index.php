@@ -28,8 +28,7 @@
     </body>
     <script>
         function simulateList(){
-            var list = $("#player_list").val();
-            list = JSON.parse("\""+list.replace(/"/g, "'")+"\"");
+            var list = JSON.parse($("#player_list").val());
             $.ajax({
                 method: "POST",
                 url: "/api/simulate.php",
