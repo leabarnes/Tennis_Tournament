@@ -60,6 +60,7 @@ class Player{
 
     public function luckiest(){
         $this->win_chance *= (1 + self::LUCK_BOOST_PERCENTAGE/100);
+        $this->win_chance = number_format($this->win_chance, 2);
     }
 
     public function getJson(){
@@ -71,8 +72,12 @@ class Player{
         $json_array["velocity"] = $this->velocity;
         $json_array["reaction"] = $this->reaction;
         $json_array["luck"] = $this->luck;
-        $json_array["win_chance"] = $this->win_chance;
+        $json_array["win_chance"] = number_format($this->win_chance, 2);
 
         return json_encode($json_array);
+    }
+
+    public function getName(){
+        return $this->name;
     }
 }
