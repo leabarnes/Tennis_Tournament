@@ -1,9 +1,9 @@
 <?php
-include '../Classes/Player.php';
-include '../Classes/PlayersArray.php';
-include '../Classes/Round.php';
-include '../Classes/Tournament.php';
-include '../Classes/Database.php';
+include '/Classes/Player.php';
+include '/Classes/PlayersArray.php';
+include '/Classes/Round.php';
+include '/Classes/Tournament.php';
+include '/Classes/Database.php';
 class TournamentController{
 
     private $current_tournament;
@@ -21,7 +21,7 @@ class TournamentController{
     public function getSequentialPlayerList($num_players, $gender){
         $player_list = array();
         for($i = 0; $i<$num_players; $i++){
-            $name = "Test "+$i;
+            $name = "Test ".$i;
             $handicap = $i%Player::MAX_HANDICAP+1;
             $extra[Player::FORCE_STRING] = $i%Player::MAX_FORCE+1;
             $extra[Player::VELOCITY_STRING] = $i%Player::MAX_VELOCITY+1;
@@ -33,7 +33,7 @@ class TournamentController{
     public function getRandomPlayerList($num_players, $gender){
         $player_list = array();
         for($i = 0; $i<$num_players; $i++){
-            $name = "Test "+$i;
+            $name = "Test ".$i;
             $handicap = rand(1,Player::MAX_HANDICAP);
             $extra[Player::FORCE_STRING] = rand(1,Player::MAX_FORCE);
             $extra[Player::VELOCITY_STRING] = rand(1,Player::MAX_VELOCITY);
