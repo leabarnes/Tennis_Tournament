@@ -1,4 +1,4 @@
-<?
+<?php
 include 'Application.php';
 
 $app = new Application();

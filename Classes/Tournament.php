@@ -1,4 +1,4 @@
-<?
+<?php
 class Tournament{
 
     const TOURNAMENT_TABLE = 'tournaments';

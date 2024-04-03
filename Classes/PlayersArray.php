@@ -1,4 +1,4 @@
-<?
+<?php
 class PlayersArray extends Player{
     
     private $players_array = array();
