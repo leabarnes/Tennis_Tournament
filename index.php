@@ -6,7 +6,7 @@
         <h3>Simulate Tournament Listed Players</h3><br/>
         <form action="">
             <p>Player List (JSON)</p>
-            <textarea id="player_list">
+            <textarea id="player_list" style="width: 632px; height: 152px;">
 {"name":"Test 0","gender":"M","handicap":24,"force":9,"velocity":4,"reaction":0},
 {"name":"Test 1","gender":"M","handicap":11,"force":10,"velocity":8,"reaction":0},
 {"name":"Test 2","gender":"M","handicap":74,"force":3,"velocity":1,"reaction":0},
@@ -34,7 +34,9 @@
                 method: "POST",
                 url: "/api/simulate.php",
                 data: { player_list: list }
-            })
+            }).done(function( msg ) {
+                alert( "Winner: " + msg );
+            });
         }
         function simulate(){
             var num_players = $("#num_players").val;
@@ -44,7 +46,9 @@
                 method: "POST",
                 url: "/api/simulate.php",
                 data: { num_players: num_players, gender: gender, random: random }
-            })
+            }).done(function( msg ) {
+                alert( "Winner: " + msg );
+            });
         }
     </script>
 </html>
