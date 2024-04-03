@@ -1,9 +1,9 @@
 <?php
-include '../Classes/Player.php';
-include '../Classes/PlayersArray.php';
-include '../Classes/Round.php';
-include '../Classes/Tournament.php';
-include '../Classes/Database.php';
+include '/Classes/Player.php';
+include '/Classes/PlayersArray.php';
+include '/Classes/Round.php';
+include '/Classes/Tournament.php';
+include '/Classes/Database.php';
 class TournamentController{
 
     private $current_tournament;
