@@ -15,9 +15,6 @@ class PlayersArray extends Player{
         }
         $first = true;
         foreach($player_list as $player_data){
-            if(!is_array($player_data)){
-                throw new Exception("Bad Array Format", 999);
-            }
             $name = $player_data["name"];
             if(!$gender){
                 $gender = $player_data["gender"];
