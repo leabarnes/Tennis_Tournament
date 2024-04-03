@@ -90,6 +90,17 @@ class TournamentController{
         return new Round($tournament_id, $round_num, $player);
     }
 
+    public function findTournament($search_field, $search_condition, $search_value){
+        $select = "*";
+        $condition = $search_condition == "lower" ? " < ":($search_condition == "equal" ? " = ":" > ");
+        $where = $search_field . $condition . $search_value;
+        $results = Database::find($select, Tournament::TOURNAMENT_TABLE, $where);
+        foreach($results as &$result){
+            $result["rounds"] = Database::find($select, Round::ROUND_TABLE, "tournament_id = ".$result["id"]);
+        }
+        echo json_encode($results);
+    }
+
 }
 
 $TOURNAMENT_CONTROLLER = new TournamentController();

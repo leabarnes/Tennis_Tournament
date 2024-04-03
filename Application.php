@@ -38,13 +38,69 @@ Apartado 5: Subir el o los servicios a AWS/Azure/etc utilizando Docker o Kuberne
 
 include 'Controllers/TournamentController.php';
 class Application{
-    public function startRandomTournament(){
+    public function startSequentialTournament($num_players, $gender){
         global $TOURNAMENT_CONTROLLER;
-        $winner = $TOURNAMENT_CONTROLLER->startTournament(16, "M", true);
+        $winner = $TOURNAMENT_CONTROLLER->startTournament($num_players, $gender);
         if(!$winner){
             echo "Error at simulating the matches. No winner found";
             return;
         }
         echo $winner->getName();
+    }
+    public function startRandomTournament($num_players, $gender){
+        global $TOURNAMENT_CONTROLLER;
+        $winner = $TOURNAMENT_CONTROLLER->startTournament($num_players, $gender, true);
+        if(!$winner){
+            echo "Error at simulating the matches. No winner found";
+            return;
+        }
+        echo $winner->getName();
+    }
+    public function startListTournament(){
+        global $TOURNAMENT_CONTROLLER;
+        $winner = $TOURNAMENT_CONTROLLER->startTournament();
+        if(!$winner){
+            echo "Error at simulating the matches. No winner found";
+            return;
+        }
+        echo $winner->getName();
+    }
+
+    public function findTournament($search_field, $search_value, $search_condition = "equal"){
+        $search_fields = array("id", "status", "date", "gender");
+        if(!in_array($search_field, $search_fields)){
+            echo 'Field not found';
+            return;
+        }
+        if($search_field == "date"){
+            $search_conditions = array("lower", "equal", "higher");
+            $search_condition = strtolower($search_condition);
+            if(!in_array($search_condition, $search_conditions)){
+                echo 'Condition not found';
+                return;
+            }
+        } else {
+            $search_condition = "equal";
+        }
+
+        if(($search_field == "id" || $search_field == "status") && !is_int($search_value)){
+            echo 'Wrong Search Value';
+            return;
+        }
+        if($search_field == "date"){
+            $aux_value = $search_value;
+            if(is_numeric($search_value)){
+                $aux_value = date("YYYY-mm-dd", $search_value);
+            }
+            try{
+                new DateTime('@'.$aux_value);
+            } catch(Exception $e){
+                echo 'Wrong Date';
+                return;
+            }
+        }
+
+        global $TOURNAMENT_CONTROLLER;
+        $TOURNAMENT_CONTROLLER->findTournament($search_field, $search_condition, $search_value);
     }
 }

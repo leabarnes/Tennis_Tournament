@@ -34,10 +34,14 @@ class Round{
     public function playRound(){
         $player1 = $this->player1;
         $player2 = $this->player2;
+        if(!$player2){
+            $this->winner = $player1;
+            return $player1;
+        }
         $player1->calculateRoundWinChance();
         $player2->calculateRoundWinChance();
         if($player1->win_chance == $player2->win_chance){
-            $this->winner = $player1->luck > $player2->luck ? $player1->tournament_id:$player2->tournament_id;
+            $this->winner = $player1->luck > $player2->luck ? $player1:$player2;
         } else {
             if($player1->luck > $player2->luck){
                 $player1->luckiest();
