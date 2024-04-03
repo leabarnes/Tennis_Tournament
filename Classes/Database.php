@@ -45,14 +45,16 @@ class Database {
     public static function insert($table, $values){
         $keys = array_keys($values);
         $query_values = array();
+        $param_values = array();
         $type = "";
         foreach($values as $value){
             $type .= self::getTypeOfValues($value);
             $query_values[] = "?";
+            $param_values[] = $value;
         }
         $query = "INSERT INTO ".$table." (".implode(",", $keys).") VALUES (".implode(", ", $query_values).")";
         $stmt = self::$mysql->prepare($query);
-        $stmt->bind_param($type, ...$values);
+        $stmt->bind_param($type, ...$param_values);
         $stmt->execute();
         $result = $stmt->get_result();
         if(!$result){
