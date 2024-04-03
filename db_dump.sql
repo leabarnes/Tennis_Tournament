@@ -8,7 +8,7 @@ CREATE TABLE `tournaments`(
   `date`  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `status` TINYINT DEFAULT 0,
   PRIMARY KEY (`id`),
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+);
 
 DROP TABLE IF EXISTS `rounds`;
 CREATE TABLE `rounds`(
@@ -19,4 +19,4 @@ CREATE TABLE `rounds`(
   `winner` tinyint(1),
   PRIMARY KEY (`id`, `tournament_id`),
   CONSTRAINT `FK_TournamentRound` FOREIGN KEY (`tournament_id`) REFERENCES tournaments(`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+);
